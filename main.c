@@ -58,12 +58,16 @@ int main(void) {
 
         switch (menu) {
             case 1:
+                cadastrarCliente(clientes);
                 break;
             case 2:
+                cadastrarVHS(vhsDvd);
                 break;
             case 3:
+                alugar(aluguel);
                 break;
             case 4:
+                devolver(aluguel);
                 break;
             case 0:
                 break;
