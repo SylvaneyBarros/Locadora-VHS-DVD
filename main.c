@@ -7,22 +7,22 @@ typedef struct {
 
 typedef struct {
     int id;
-    char nome[100];
+    char titulo[100];
 } VHS_DVD;
 
 typedef struct {
     int id;
-    char nome[100];
-} Alugueis;
+    char cliente[100];
+    char titulo[100];
+} Aluguel;
 
 int main(void) {
     Cliente clientes[4];
-    VHS_DVD vhs_dvd[10];
-    Alugueis aluguel[10];
+    VHS_DVD vhs_dvd[50];
+    Aluguel aluguel[100];
 
     int menu;
-
-
+    
     do {
         printf("Escolha uma opção:\n");
         printf(" 1 - Cadastro de cliente\n");
