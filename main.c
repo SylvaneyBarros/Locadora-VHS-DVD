@@ -5,6 +5,8 @@
 typedef struct {
     int id;
     char nome[100];
+    char dataDeNascimento[10];
+    char telefone[11];
 } Cliente;
 
 typedef struct {
