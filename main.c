@@ -49,8 +49,13 @@ void excluirCliente() {
     return;
 }
 
-void cadastrarVHS() {
+void cadastrarMidia() {
     printf("Informe o nome do vhs:\n");
+    return;
+}
+
+void tipoDeMidia() {
+    printf("Informe o tipo da midia:\n");
     return;
 }
 
@@ -59,6 +64,10 @@ void alugar() {
     return;
 }
 void devolver() {
+    printf("Informe o nome do alugar:\n");
+    return;
+}
+void excluir() {
     printf("Informe o nome do alugar:\n");
     return;
 }
@@ -80,13 +89,13 @@ void menuCliente() {
                 cadastrarCliente();
                 break;
             case 2:
-                cadastrarVHS(vhsDvd);
+                listarCliente();
                 break;
             case 3:
-                alugar(aluguel);
+                editarCadastrar();
                 break;
             case 4:
-                devolver(aluguel);
+                excluirCliente();
                 break;
             case 0:
                 break;
@@ -102,26 +111,30 @@ int main(void) {
     int menu;
 
     do {
-        printf("Escolha uma opção:\n");
-        printf(" 1 - Cliente\n");
-        printf(" 2 - Mídia VHS/DVD\n");
+        printf("Menu Mídia:\n");
+        printf(" 1 - Cadastrar mídia\n");
+        printf(" 2 - Tipo de Mídia VHS/DVD\n");
         printf(" 3 - Alugar\n");
-        printf(" 4 - Devoluçào\n");
-        printf(" 0 - Sair\n");
+        printf(" 4 - Devolver\n");
+        printf ("5 - Excluir\n");
+        printf(" 0 - Voltar\n");
         scanf("%d", &menu);
 
         switch (menu) {
             case 1:
-                menuCliente();
+                cadastrarMidia();
                 break;
             case 2:
-                cadastrarVHS(vhsDvd);
+                tipoDeMidia();
                 break;
             case 3:
-                alugar(aluguel);
+                alugar();
                 break;
             case 4:
-                devolver(aluguel);
+                devolver();
+                break;
+            case 5:
+                excluir();
                 break;
             case 0:
                 break;
