@@ -30,21 +30,17 @@ VHS_DVD vhsDvd[50];
 Aluguel aluguel[100];
 
 void cadastrarMidia() {
-    printf("Informe o nome do vhs:\n");
     return;
 }
 
 void listarMidia() {
-    printf("Informe o nome do vhs:\n");
     return;
 }
 void editarMidia() {
-    printf("Informe o nome do vhs:\n");
     return;
 }
 
 void excluirMidia() {
-    printf("Informe o nome do vhs:\n");
     return;
 }
 
@@ -83,22 +79,18 @@ void menuMidia() {
 }
 
 void cadastrarCliente() {
-    printf("Informe o nome do cliente:\n");
     return;
 }
 
 void listarCliente() {
-    printf("Informe o nome do cliente:\n");
     return;
 }
 
 void editarCadastrar() {
-    printf("Informe o nome do cliente:\n");
     return;
 }
 
 void excluirCliente() {
-    printf("Informe o nome do cliente:\n");
     return;
 }
 
@@ -136,11 +128,9 @@ void menuCliente() {
     while (menu != 0);
 }
 void alugar() {
-    printf("Informe o nome do alugar:\n");
-    return;
+     return;
 }
 void devolver() {
-    printf("Informe o nome do alugar:\n");
     return;
 }
 
