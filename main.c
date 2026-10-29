@@ -29,6 +29,59 @@ Cliente clientes[4];
 VHS_DVD vhsDvd[50];
 Aluguel aluguel[100];
 
+void cadastrarMidia() {
+    printf("Informe o nome do vhs:\n");
+    return;
+}
+
+void listarMidia() {
+    printf("Informe o nome do vhs:\n");
+    return;
+}
+void editarMidia() {
+    printf("Informe o nome do vhs:\n");
+    return;
+}
+
+void excluirMidia() {
+    printf("Informe o nome do vhs:\n");
+    return;
+}
+
+void menuMidia() {
+    int menu;
+
+    do {
+        printf("Menu Mídia:\n");
+        printf(" 1 - Cadastrar mídia\n");
+        printf(" 2 - Listar mídia\n");
+        printf(" 3 - Editar\n");
+        printf(" 4 - Excluir\n");
+        printf(" 0 - Voltar\n");
+        scanf("%d", &menu);
+
+        switch (menu) {
+            case 1:
+                cadastrarMidia();
+                break;
+            case 2:
+                listarMidia();
+                break;
+            case 3:
+                editarMidia();
+                break;
+            case 4:
+                excluirMidia();
+                break;
+            case 0:
+                break;
+            default:
+                printf("Opção inválida!\n");
+        }
+    }
+    while (menu != 0);
+}
+
 void cadastrarCliente() {
     printf("Informe o nome do cliente:\n");
     return;
@@ -46,29 +99,6 @@ void editarCadastrar() {
 
 void excluirCliente() {
     printf("Informe o nome do cliente:\n");
-    return;
-}
-
-void cadastrarMidia() {
-    printf("Informe o nome do vhs:\n");
-    return;
-}
-
-void tipoDeMidia() {
-    printf("Informe o tipo da midia:\n");
-    return;
-}
-
-void alugar() {
-    printf("Informe o nome do alugar:\n");
-    return;
-}
-void devolver() {
-    printf("Informe o nome do alugar:\n");
-    return;
-}
-void excluir() {
-    printf("Informe o nome do alugar:\n");
     return;
 }
 
@@ -105,36 +135,40 @@ void menuCliente() {
     }
     while (menu != 0);
 }
+void alugar() {
+    printf("Informe o nome do alugar:\n");
+    return;
+}
+void devolver() {
+    printf("Informe o nome do alugar:\n");
+    return;
+}
 
 int main(void) {
 
     int menu;
 
     do {
-        printf("Menu Mídia:\n");
-        printf(" 1 - Cadastrar mídia\n");
-        printf(" 2 - Tipo de Mídia VHS/DVD\n");
+        printf("Locadora de vídeo:\n");
+        printf(" 1 - Cliente\n");
+        printf(" 2 - Mídia VHS/DVD\n");
         printf(" 3 - Alugar\n");
         printf(" 4 - Devolver\n");
-        printf ("5 - Excluir\n");
-        printf(" 0 - Voltar\n");
+        printf(" 0 - Sair\n");
         scanf("%d", &menu);
 
         switch (menu) {
             case 1:
-                cadastrarMidia();
+                menuCliente();
                 break;
             case 2:
-                tipoDeMidia();
+                menuMidia();
                 break;
             case 3:
                 alugar();
                 break;
             case 4:
                 devolver();
-                break;
-            case 5:
-                excluir();
                 break;
             case 0:
                 break;
