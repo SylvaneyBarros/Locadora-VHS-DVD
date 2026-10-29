@@ -2,32 +2,37 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct {
+struct Cliente {
     int id;
-    char nome[100];
-    char dataDeNascimento[10];
-    char telefone[11];
-} Cliente;
+    char nome[50];
+    char dataDeNascimento[11];
+    char telefone[12];
+    float multaPendente;
+    int ativo; // 1 = Ativo, 0 = Removido
+};
 
-typedef struct {
+struct VHS_DVD {
     int id;
     char titulo[100];
     char tipoDeMidia[3];
     char genero[20];
-} VHS_DVD;
+};
 
-typedef struct {
+struct Aluguel{
     int id;
     char cliente[100];
     char titulo[100];
     char dataLocacao[10];
     char dataDevolucao[10];
     bool devolvido;
-} Aluguel;
+} ;
 
-Cliente clientes[4];
-VHS_DVD vhsDvd[50];
-Aluguel aluguel[100];
+struct Cliente clientes[50];
+int totalClientes = 0;
+
+struct VHS_DVD vhsDvd[50];
+
+struct Aluguel aluguel[50];
 
 void cadastrarMidia() {
     return;
@@ -79,31 +84,33 @@ void menuMidia() {
 }
 
 void cadastrarCliente() {
-    return;
+    printf("\n[Em construcao] Cadastro de Cliente...\n");
+    printf("Campos previstos: Nome, Data de Nascimento, Telefone e Multa.\n");
 }
 
 void listarCliente() {
-    return;
+    printf("\n[Em construcao] Listagem e Busca de Clientes...\n");
 }
 
-void editarCadastrar() {
-    return;
+void editarCliente() {
+    printf("\n[Em construcao] Edicao de Cliente por ID...\n");
 }
 
 void excluirCliente() {
-    return;
+    printf("\n[Em construcao] Remocao de Cliente...\n");
 }
 
 void menuCliente() {
     int menu;
 
     do {
-        printf("Menu Cliente:\n");
+        printf("\n--- MENU CLIENTE ---\n");
         printf(" 1 - Cadastrar cliente\n");
-        printf(" 2 - Listar cliente\n");
-        printf(" 3 - Editar\n");
-        printf(" 4 - Excluir\n");
+        printf(" 2 - Listar / Buscar cliente\n");
+        printf(" 3 - Editar cliente\n");
+        printf(" 4 - Excluir cliente\n");
         printf(" 0 - Voltar\n");
+        printf("Escolha uma acao: ");
         scanf("%d", &menu);
 
         switch (menu) {
@@ -114,24 +121,26 @@ void menuCliente() {
                 listarCliente();
                 break;
             case 3:
-                editarCadastrar();
+                editarCliente();
                 break;
             case 4:
                 excluirCliente();
                 break;
             case 0:
+                printf("\nRetornando ao menu principal...\n");
                 break;
             default:
-                printf("Opção inválida!\n");
+                printf("\n[ERRO] Opcao invalida!\n");
         }
-    }
-    while (menu != 0);
+    } while (menu != 0);
 }
-void alugar() {
+
+void menuAlugar() {
      return;
 }
-void devolver() {
-    return;
+
+void menuRelatorio() {
+
 }
 
 int main(void) {
@@ -139,11 +148,11 @@ int main(void) {
     int menu;
 
     do {
-        printf("Locadora de vídeo:\n");
+        printf("--- Locadora de vídeo ---\n");
         printf(" 1 - Cliente\n");
         printf(" 2 - Mídia VHS/DVD\n");
-        printf(" 3 - Alugar\n");
-        printf(" 4 - Devolver\n");
+        printf(" 3 - Alugar/Devolver\n");
+        printf(" 4 - Relatorio\n");
         printf(" 0 - Sair\n");
         scanf("%d", &menu);
 
@@ -155,10 +164,10 @@ int main(void) {
                 menuMidia();
                 break;
             case 3:
-                alugar();
+                menuAlugar();
                 break;
             case 4:
-                devolver();
+                menuRelatorio();
                 break;
             case 0:
                 break;
