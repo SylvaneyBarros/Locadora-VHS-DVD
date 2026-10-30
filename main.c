@@ -13,9 +13,12 @@ struct Cliente {
 
 struct VHS_DVD {
     int id;
-    char titulo[100];
-    char tipoDeMidia[3];
+    char titulo[50];
+    char tipoDeMidia[4]; // "VHS" ou "DVD"
     char genero[20];
+    float precoLocacao;
+    int copiasDisponiveis;
+    int ativo; // 1 = Ativo, 0 = Removido
 };
 
 struct Aluguel{
@@ -31,58 +34,13 @@ struct Cliente clientes[50];
 int totalClientes = 0;
 
 struct VHS_DVD vhsDvd[50];
+int totalMidias = 0;
 
 struct Aluguel aluguel[50];
 
-void cadastrarMidia() {
-    return;
-}
-
-void listarMidia() {
-    return;
-}
-void editarMidia() {
-    return;
-}
-
-void excluirMidia() {
-    return;
-}
-
-void menuMidia() {
-    int menu;
-
-    do {
-        printf("Menu Mídia:\n");
-        printf(" 1 - Cadastrar mídia\n");
-        printf(" 2 - Listar mídia\n");
-        printf(" 3 - Editar\n");
-        printf(" 4 - Excluir\n");
-        printf(" 0 - Voltar\n");
-        scanf("%d", &menu);
-
-        switch (menu) {
-            case 1:
-                cadastrarMidia();
-                break;
-            case 2:
-                listarMidia();
-                break;
-            case 3:
-                editarMidia();
-                break;
-            case 4:
-                excluirMidia();
-                break;
-            case 0:
-                break;
-            default:
-                printf("Opção inválida!\n");
-        }
-    }
-    while (menu != 0);
-}
-
+// ----------------------------------------------------------------------------
+// Joice (Nome Completo e RGM)
+// ----------------------------------------------------------------------------
 void cadastrarCliente() {
     printf("\n[Em construcao] Cadastro de Cliente...\n");
     printf("Campos previstos: Nome, Data de Nascimento, Telefone e Multa.\n");
@@ -125,6 +83,61 @@ void menuCliente() {
                 break;
             case 4:
                 excluirCliente();
+                break;
+            case 0:
+                printf("\nRetornando ao menu principal...\n");
+                break;
+            default:
+                printf("\n[ERRO] Opcao invalida!\n");
+        }
+    } while (menu != 0);
+}
+
+// ----------------------------------------------------------------------------
+// Natalia - RGM: 37482971
+// ----------------------------------------------------------------------------
+void cadastrarMidia() {
+    printf("\n[Em construcao] Cadastro de Midia...\n");
+    printf("Campos previstos: Titulo, Tipo (VHS/DVD), Genero, Preco e Copias.\n");
+}
+
+void listarMidia() {
+    printf("\n[Em construcao] Listagem e Busca de Midias...\n");
+}
+
+void editarMidia() {
+    printf("\n[Em construcao] Edicao de Midia por ID...\n");
+}
+
+void excluirMidia() {
+    printf("\n[Em construcao] Remocao de Midia...\n");
+}
+
+void menuMidia() {
+    int menu;
+
+    do {
+        printf("\n--- MENU MIDIA VHS/DVD ---\n");
+        printf(" 1 - Cadastrar midia\n");
+        printf(" 2 - Listar / Buscar midia\n");
+        printf(" 3 - Editar midia\n");
+        printf(" 4 - Excluir midia\n");
+        printf(" 0 - Voltar\n");
+        printf("Escolha uma acao: ");
+        scanf("%d", &menu);
+
+        switch (menu) {
+            case 1:
+                cadastrarMidia();
+                break;
+            case 2:
+                listarMidia();
+                break;
+            case 3:
+                editarMidia();
+                break;
+            case 4:
+                excluirMidia();
                 break;
             case 0:
                 printf("\nRetornando ao menu principal...\n");
