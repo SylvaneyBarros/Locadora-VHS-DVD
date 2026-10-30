@@ -94,7 +94,7 @@ void menuCliente() {
 }
 
 // ----------------------------------------------------------------------------
-// Natalia - RGM: 37482971
+// Natalia Santos - RGM: 37482971
 // ----------------------------------------------------------------------------
 void cadastrarMidia() {
     printf("\n[Em construcao] Cadastro de Midia...\n");
@@ -148,6 +148,74 @@ void menuMidia() {
     } while (menu != 0);
 }
 
+
+struct CompraMidia {
+    int id;
+    char fornecedor[40];
+    char descricao[40];
+    float custoCompra;
+    int quantidade;
+    int ativo; // 1 = Ativa, 0 = Cancelada
+};
+
+struct CompraMidia compras[50];
+int totalCompras = 0;
+
+// ----------------------------------------------------------------------------
+// Autor: Maria Vitória Machado - RGM: 39001814
+// ----------------------------------------------------------------------------
+void cadastrarCompra() {
+    printf("\n[Em construcao] Registro de compra de midias...\n");
+    printf("Campos previstos: Fornecedor, Descricao, Custo e Quantidade.\n");
+}
+
+void listarCompra() {
+    printf("\n[Em construcao] Listagem e Busca de compras por fornecedor...\n");
+}
+
+void editarCompra() {
+    printf("\n[Em construcao] Edicao de compra por ID...\n");
+}
+
+void excluirCompra() {
+    printf("\n[Em construcao] Cancelamento de compra...\n");
+}
+
+void menuCompra() {
+    int menu;
+
+    do {
+        printf("\n--- MENU COMPRA DE MIDIAS / FORNECEDORES ---\n");
+        printf(" 1 - Registrar compra\n");
+        printf(" 2 - Listar / Buscar compras\n");
+        printf(" 3 - Editar compra\n");
+        printf(" 4 - Cancelar compra\n");
+        printf(" 0 - Voltar\n");
+        printf("Escolha uma acao: ");
+        scanf("%d", &menu);
+
+        switch (menu) {
+            case 1:
+                cadastrarCompra();
+                break;
+            case 2:
+                listarCompra();
+                break;
+            case 3:
+                editarCompra();
+                break;
+            case 4:
+                excluirCompra();
+                break;
+            case 0:
+                printf("\nRetornando ao menu principal...\n");
+                break;
+            default:
+                printf("\n[ERRO] Opcao invalida!\n");
+        }
+    } while (menu != 0);
+}
+
 void menuAlugar() {
      return;
 }
@@ -161,9 +229,9 @@ int main(void) {
     int menu;
 
     do {
-        printf("--- Locadora de vídeo ---\n");
+        printf("--- Locadora de video ---\n");
         printf(" 1 - Cliente\n");
-        printf(" 2 - Mídia VHS/DVD\n");
+        printf(" 2 - Midia VHS/DVD\n");
         printf(" 3 - Alugar/Devolver\n");
         printf(" 4 - Relatorio\n");
         printf(" 0 - Sair\n");
@@ -185,7 +253,7 @@ int main(void) {
             case 0:
                 break;
             default:
-                printf("Opção inválida!\n");
+                printf("Opcao invalida!\n");
         }
     }
     while (menu != 0);
