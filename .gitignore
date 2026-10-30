@@ -53,3 +53,39 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# CMake / CLion build directories
+cmake-build-*/
+build/
+out/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+Makefile
+Testing/
+_deps/
+
+# Executável do projeto
+Locadora_VHS_DVD
+
+# JetBrains IDEs (CLion) - o projeto é regenerado a partir do CMakeLists.txt
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editores
+.vscode/
+*.swp
+*~
+
+# Configurações locais (Claude Code / MCP da IDE)
+.claude/settings.local.json
+.mcp.json
+CMakeLists.txt
