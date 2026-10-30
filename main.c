@@ -39,7 +39,7 @@ int totalMidias = 0;
 struct Aluguel aluguel[50];
 
 // ----------------------------------------------------------------------------
-// Joice (Nome Completo e RGM)
+// Sylvaney Joice Alves de Barros - RGM: 47501863
 // ----------------------------------------------------------------------------
 void cadastrarCliente() {
     printf("\n[Em construcao] Cadastro de Cliente...\n");
