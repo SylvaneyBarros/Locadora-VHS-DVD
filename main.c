@@ -45,12 +45,40 @@ int totalMidias = 0;
 // Sylvaney Joice Alves de Barros - RGM: 47501863
 // ----------------------------------------------------------------------------
 void cadastrarCliente() {
-    printf("\n[Em construcao] Cadastro de Cliente...\n");
-    printf("Campos previstos: Nome, Data de Nascimento, Telefone e Multa.\n");
+    printf("\nCadastro de Cliente\n");
+    if(totalClientes >= 50) {
+        printf("Excede a capacidade de cadastro.\n");
+        return;
+    }
+    printf("Nome: ");
+    scanf("%s", &clientes[totalClientes].nome);
+
+    printf("Data de Nascimento: ");
+    scanf(" %s", &clientes[totalClientes].dataDeNascimento);
+
+    printf("Telefone: ");
+    scanf(" %s", &clientes[totalClientes].telefone);
+
+    clientes[totalClientes].id = totalClientes;
+
+    clientes[totalClientes].ativo = 1;
+
+    totalClientes++;
+
+    printf("Cliente cadastrado com sucesso!\n");
+
 }
 
 void listarCliente() {
-    printf("\n[Em construcao] Listagem e Busca de Clientes...\n");
+    printf("\nListagem de Clientes\n");
+
+    if(totalClientes == 0) {
+        printf("Não há clientes cadastrados.\n");
+        return;
+    }
+    for(int i = 0; i < totalClientes; i++) {
+        printf("%d - %s\n", clientes[i].id, clientes[i].nome);
+    }
 }
 
 void editarCliente() {
