@@ -219,15 +219,72 @@ void menuCompra() {
     } while (menu != 0);
 }
 
+// ----------------------------------------------------------------------------
 // Autor: Stephany Christina Barbosa da Silva - RGM 46810927
+// ----------------------------------------------------------------------------
 
-void alugar() {
-    printf("\n[Em construcao] Registro de locacao (ID Cliente + ID Midia)...\n");
+void menualugar() {
+    int i;
+    int idCliente;
+    int idMidia;
+    int posCliente = -1;
+
+    printf("\n===== NOVA LOCACAO =====\n");
+
+    printf("Digite o idCliente: ");
+    scanf("%d", &idCliente);
+
+    printf("Digite o idMidia: ");
+    scanf("%d", &idMidia);
+
+    for (i = 0; i < totalClientes; i++) {
+        if (clientes[i].id == idCliente) {
+            posCliente = i;
+            break;
+        }
+    }
+
+    if (posCliente == -1) {
+        printf("\nCliente nao encontrado!\n");
+        return;
+    }
+
+    
+    if (clientes[posCliente].ativo != 1) {
+        printf("\nEste cliente esta inativo!\n");
+        return;
+    }
 }
 
 void listarAluguel() {
-    printf("\n[Em construcao] Listagem e Busca de locacoes...\n");
+	int i;
+	
+	  printf("\n===== LISTA DE LOCACOES =====\n");
+	  
+	if (totalAlugueis == 0) {
+        printf("\nNenhuma locacao cadastrada!\n");
+        return;
 }
+
+    for (i = 0; i < totalAlugueis; i++) {
+		
+		printf("\n-----------------------------\n");
+		printf("ID da locacao: %d\n", aluguel[i].id);
+		printf("ID do cliente: %d\n", aluguel[i].idCliente);
+        printf("ID da midia: %d\n", aluguel[i].idMidia);
+        printf("Data da locacao: %s\n", aluguel[i].dataLocacao);
+        printf("Data da devolucao: %s\n", aluguel[i].dataDevolucao);
+        printf("Valor total: R$ %.2f\n", aluguel[i].valorTotal);
+        
+        if (aluguel[i].devolvido == 1) {
+            printf("Status: Devolvido\n");
+        } else {
+            printf("Status: Em aberto\n");
+        }
+    }
+    printf("\n-----------------------------\n");
+	}
+		
 
 void devolver() {
     printf("\n[Em construcao] Registro de devolucao por ID...\n");
@@ -264,7 +321,7 @@ void menuAluguel() {
         
         switch (menu) {
             case 1:
-                alugar();
+                menualugar();
                 break;
             case 2:
                 listarAluguel();
