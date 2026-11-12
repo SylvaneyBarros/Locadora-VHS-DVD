@@ -4,15 +4,17 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "utils.h"
 
 struct Cliente {
     int id;
     char nome[50];
     char dataDeNascimento[11];
     char telefone[12];
-    float multaPendente;
     int ativo; // 1 = Ativo, 0 = Removido
 };
+
+FILE *arquivoClientes;
 
 struct Cliente clientes[50];
 int totalClientes = 0;
@@ -25,7 +27,7 @@ void cadastrarCliente() {
         return;
     }
     printf("Nome: ");
-    scanf("%s", clientes[totalClientes].nome);
+    scanf(" %50[^\n]", clientes[totalClientes].nome);
 
     printf("Data de Nascimento: ");
     scanf(" %s", clientes[totalClientes].dataDeNascimento);
@@ -36,6 +38,16 @@ void cadastrarCliente() {
     clientes[totalClientes].id = totalClientes;
 
     clientes[totalClientes].ativo = 1;
+
+    arquivoClientes = fopen("clientes.csv", "a");
+    fprintf(arquivoClientes, "%d;%s;%s;%s;%d\n",
+        clientes[totalClientes].id,
+        clientes[totalClientes].nome,
+        clientes[totalClientes].dataDeNascimento,
+        clientes[totalClientes].telefone,
+        clientes[totalClientes].ativo);
+
+    fclose(arquivoClientes);
 
     totalClientes++;
 
