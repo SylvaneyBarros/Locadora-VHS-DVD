@@ -51,13 +51,13 @@ void cadastrarCliente() {
         return;
     }
     printf("Nome: ");
-    scanf("%s", &clientes[totalClientes].nome);
+    scanf("%s", clientes[totalClientes].nome);
 
     printf("Data de Nascimento: ");
-    scanf(" %s", &clientes[totalClientes].dataDeNascimento);
+    scanf(" %s", clientes[totalClientes].dataDeNascimento);
 
     printf("Telefone: ");
-    scanf(" %s", &clientes[totalClientes].telefone);
+    scanf(" %s", clientes[totalClientes].telefone);
 
     clientes[totalClientes].id = totalClientes;
 
@@ -81,12 +81,50 @@ void listarCliente() {
     }
 }
 
+void localizarClienteNome() {
+
+}
+
+void localizarClienteId() {
+
+}
+
 void editarCliente() {
-    printf("\n[Em construcao] Edicao de Cliente por ID...\n");
+    printf("\nEditar cadastro\n");
+
+    if(totalClientes == 0) {
+        printf("Não há clientes cadastrados.\n");
+        return;
+    }
+
+    int menu;
+
+    do {
+        printf("Localizar por:\n");
+        printf(" 1 - Nome do cliente\n");
+        printf(" 2 - Id do cliente\n");
+        printf(" 0 - Voltar\n");
+        scanf("%d", &menu);
+
+        switch (menu) {
+            case 1:
+                localizarClienteNome();
+                break;
+            case 2:
+                localizarClienteId();
+                break;
+            case 0:
+                printf("Retornando ao menu cliente\n");
+                break;
+            default:
+                printf("\n[ERRO] Opção inválida!\n");
+        }
+
+    } while (menu != 0);
 }
 
 void excluirCliente() {
-    printf("\n[Em construcao] Remocao de Cliente...\n");
+    printf("\nExcluir de Cliente...\n");
 }
 
 void menuCliente() {
@@ -119,7 +157,7 @@ void menuCliente() {
                 printf("\nRetornando ao menu principal...\n");
                 break;
             default:
-                printf("\n[ERRO] Opcao invalida!\n");
+                printf("\n[ERRO] Opção inválida!\n");
         }
     } while (menu != 0);
 }
