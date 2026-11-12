@@ -84,10 +84,32 @@ void listarCliente() {
 
 void localizarClienteNome() {
 
+    char nome[50];
+    int localizados = 0;
+    int idCliente;
+
+    printf("\nInforme o nome do cliente:");
+    scanf("%s", nome);
+
+    for(int i = 0; i < totalClientes; i++) {
+        if (strstr (clientes[i].nome, nome) != NULL) {
+            printf ("%d - %s\n", clientes[i].id, clientes[i].nome);
+            localizados++;
+        }
+    }
+    if (localizados == 0) {
+        printf ("Nenhum cliente foi localizado!\n");
+        return;
+    }
+    else {
+        printf("Digite o Id do cliente para editar: ");
+        scanf("%d", &idCliente);
+
+        //TODO: A PARTIR DE AGORA DEVO EDITAR AS PROPRIEDADES DOS CLIENTES BASEADO NO ID INSERIDO.
+    }
 }
 
 void localizarClienteId() {
-
 }
 
 void editarCliente() {
