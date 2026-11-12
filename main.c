@@ -47,6 +47,7 @@ int totalMidias = 0;
 // ----------------------------------------------------------------------------
 void cadastrarCliente() {
     printf("\nCadastro de Cliente\n");
+
     if(totalClientes >= 50) {
         printf("Excede a capacidade de cadastro.\n");
         return;
@@ -69,7 +70,40 @@ void cadastrarCliente() {
     printf("Cliente cadastrado com sucesso!\n");
 
 }
+int clienteValido(int id) {
+    if (id < 0 || id >= totalClientes) {
+        return 0;
+    }
+    if (clientes[id].ativo == 0) {
+        return 0;
+    }
+    return 1;
+}
 
+void editarClientePorId(int id) {
+    if (!clienteValido(id)) {
+        printf("Id inválido ou cliente removido.\n");
+        return;
+    }
+
+    printf("\nDados atuais:\n");
+    printf("Nome: %s\n", clientes[id].nome);
+    printf("Data de Nascimento: %s\n", clientes[id].dataDeNascimento);
+    printf("Telefone: %s\n", clientes[id].telefone);
+
+    printf("\nInforme os novos dados:\n");
+
+    printf("Nome: ");
+    scanf("%s", clientes[id].nome);
+
+    printf("Data de Nascimento: ");
+    scanf(" %s", clientes[id].dataDeNascimento);
+
+    printf("Telefone: ");
+    scanf(" %s", clientes[id].telefone);
+
+    printf("Cadastro atualizado com sucesso!\n");
+}
 void listarCliente() {
     printf("\nListagem de Clientes\n");
 
@@ -78,7 +112,7 @@ void listarCliente() {
         return;
     }
     for(int i = 0; i < totalClientes; i++) {
-        printf("%d - %s\n", clientes[i].id, clientes[i].nome);
+        printf("%d - %s - %s\n", clientes[i].id, clientes[i].nome, clientes[i].ativo == 1?"Ativo" : "Inativo");
     }
 }
 
@@ -110,6 +144,15 @@ void localizarClienteNome() {
 }
 
 void localizarClienteId() {
+
+    int idCliente;
+    printf("\nInforme o ID do cliente:");
+    scanf("%s", nome);
+    for(int i = 0; i < totalClientes; i++) {
+        if (strstr (clientes[i].nome, nome) != NULL) {
+            printf("%d - %s\n", clientes[i].id, clientes[i].nome);
+        }
+    }
 }
 
 void editarCliente() {
