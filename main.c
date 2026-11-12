@@ -102,7 +102,7 @@ void editarClientePorId(int id) {
     printf("Telefone: ");
     scanf(" %s", clientes[id].telefone);
 
-    printf("Cadastro atualizado com sucesso!\n");
+    printf("Cadastro atualizado com sucesso!\n\n");
 }
 void listarCliente() {
     printf("\nListagem de Clientes\n");
@@ -177,7 +177,7 @@ void editarCliente() {
                 localizarClienteId();
                 break;
             case 0:
-                printf("Retornando ao menu cliente\n");
+                printf("Retornando ao menu cliente.\n");
                 break;
             default:
                 printf("\n[ERRO] Opção inválida!\n");
@@ -187,7 +187,33 @@ void editarCliente() {
 }
 
 void excluirCliente() {
-    printf("\nExcluir de Cliente...\n");
+    int idCliente;
+    char confirmacao;
+
+    printf("\nExcluir Cliente\n");
+
+    if(totalClientes == 0) {
+        printf("Não há clientes cadastrados.\n");
+        return;
+    }
+
+    printf("Informe o Id do cliente: ");
+    scanf("%d", &idCliente);
+
+    if (!clienteValido(idCliente)) {
+        printf("Id inválido ou cliente já removido.\n");
+        return;
+    }
+
+    printf("Deseja realmente excluir %s? (S/N): ", clientes[idCliente].nome);
+    scanf(" %c", &confirmacao);
+
+    if (confirmacao == 'S' || confirmacao == 's') {
+        clientes[idCliente].ativo = 0;
+        printf("Cliente excluído com sucesso!\n");
+    } else {
+        printf("Exclusão cancelada.\n");
+    }
 }
 
 void menuCliente() {
