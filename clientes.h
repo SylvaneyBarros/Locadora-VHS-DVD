@@ -20,6 +20,9 @@ struct Cliente clientes[50];
 int totalClientes = 0;
 
 void cadastrarCliente() {
+
+    limparTela();
+
     printf("\nCadastro de Cliente\n");
 
     if(totalClientes >= 50) {
@@ -89,6 +92,9 @@ void editarClientePorId(int id) {
     printf("Cadastro atualizado com sucesso!\n\n");
 }
 void listarCliente() {
+
+    limparTela();
+
     printf("\nListagem de Clientes\n");
 
     if(totalClientes == 0) {
@@ -98,6 +104,8 @@ void listarCliente() {
     for(int i = 0; i < totalClientes; i++) {
         printf("%d - %s - %s\n", clientes[i].id, clientes[i].nome, clientes[i].ativo == 1?"Ativo" : "Inativo");
     }
+
+    pausar();
 }
 
 void localizarClienteNome() {
@@ -200,8 +208,35 @@ void excluirCliente() {
     }
 }
 
+void carregarClientes() {
+    arquivoClientes = fopen("clientes.csv", "r");
+    if (arquivoClientes == NULL) {
+       return;
+    }
+
+    struct Cliente auxCliente;
+
+    while (fscanf(arquivoClientes, "%d;%49[^;];%10[^;];%11[^;];%d\n",
+        &auxCliente.id,
+        auxCliente.nome,
+        auxCliente.dataDeNascimento,
+        auxCliente.telefone,
+        &auxCliente.ativo) == 5) {
+
+        if (auxCliente.id >= 0 && auxCliente.id < 50) {
+            clientes[auxCliente.id] = auxCliente;
+            totalClientes++;
+        }
+    }
+
+}
+
 void menuCliente() {
     int menu;
+
+    carregarClientes();
+
+    limparTela();
 
     do {
         printf("\n--- MENU CLIENTE ---\n");
