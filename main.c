@@ -1,4 +1,4 @@
-#include "aluguel.h"
+#include "locacoes.h"
 #include "clientes.h"
 #include "compras.h"
 #include "midias.h"
@@ -9,6 +9,7 @@ int main(void) {
     carregarClientes();
     carregarMidias();
     carregarCompras();
+    carregarAlugueisCSV();
 
     do {
         printf("--- Locadora de video ---\n");
