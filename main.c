@@ -294,7 +294,7 @@ int main(void) {
         printf(" 3 - Alugar/Devolver\n");
         printf(" 4 - Comprar midea\n");
         printf(" 0 - Sair\n");
-        scanf("%d", &menu);
+        menu = lerInteiro();
 
         switch (menu) {
             case 1:

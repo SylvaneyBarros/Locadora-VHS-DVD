@@ -1,4 +1,4 @@
-
+// Arquivo: clientes.h | Autor: Sylvaney Joice Alves de Barros - RGM: 47501863
 #ifndef LOCADORA_VHS_DVD_CLIENTES_H
 #define LOCADORA_VHS_DVD_CLIENTES_H
 
@@ -41,17 +41,31 @@ void cadastrarCliente() {
     printf("Nome: ");
     scanf(" %49[^\n]", clientes[totalClientes].nome);
 
+    if (strchr(clientes[totalClientes].nome, ';') != NULL) {
+        printf("[ERRO] O nome nao pode conter ';'.\n");
+        return;
+    }
+
     printf("Data de Nascimento: ");
     scanf(" %10[^\n]", clientes[totalClientes].dataDeNascimento);
+    scanf("%*[^\n]");
 
     printf("Telefone: ");
     scanf(" %11[^\n]", clientes[totalClientes].telefone);
+    scanf("%*[^\n]");
+
 
     clientes[totalClientes].id = totalClientes;
 
     clientes[totalClientes].ativo = 1;
 
     arquivoClientes = fopen("clientes.csv", "a");
+
+    if (arquivoClientes == NULL) {
+        printf("[ERRO] Nao foi possivel abrir clientes.csv.\n");
+        return;
+    }
+
     fprintf(arquivoClientes, "%d;%s;%s;%s;%d\n",
         clientes[totalClientes].id,
         clientes[totalClientes].nome,
@@ -108,14 +122,24 @@ void editarClientePorId(int id) {
 
     printf("\nInforme os novos dados:\n");
 
+    char novoNome[50];
     printf("Nome: ");
-    scanf(" %49[^\n]", clientes[id].nome);
+    scanf(" %49[^\n]", novoNome);
+    scanf("%*[^\n]");
+
+    if (strchr(novoNome, ';') != NULL) {
+        printf("[ERRO] O nome nao pode conter ';'.\n");
+        return;
+    }
+    strcpy(clientes[id].nome, novoNome);
 
     printf("Data de Nascimento: ");
     scanf(" %10[^\n]", clientes[id].dataDeNascimento);
+    scanf("%*[^\n]");
 
     printf("Telefone: ");
     scanf(" %11[^\n]", clientes[id].telefone);
+    scanf("%*[^\n]");
 
     salvarClientes();
 
@@ -138,6 +162,26 @@ void listarCliente() {
     pausar();
 }
 
+void buscarClienteNome() {
+    char nome[50], nomeMin[50], buscaMin[50];
+    int localizados = 0;
+
+    printf("\nInforme o nome (ou parte dele): ");
+    scanf(" %49[^\n]", nome);
+    paraMinusculo(buscaMin, nome);
+
+    for (int i = 0; i < totalClientes; i++) {
+        paraMinusculo(nomeMin, clientes[i].nome);
+        if (strstr(nomeMin, buscaMin) != NULL) {
+            printf("%d - %s - %s - %s\n", clientes[i].id, clientes[i].nome,
+                   clientes[i].telefone, clientes[i].ativo == 1 ? "Ativo" : "Inativo");
+            localizados++;
+        }
+    }
+    if (localizados == 0) printf("Nenhum cliente foi localizado!\n");
+    pausar();
+}
+
 void localizarClienteNome() {
 
     char nome[50];
@@ -147,12 +191,17 @@ void localizarClienteNome() {
     printf("\nInforme o nome do cliente:");
     scanf(" %49[^\n]", nome);
 
-    for(int i = 0; i < totalClientes; i++) {
-        if (strstr (clientes[i].nome, nome) != NULL) {
-            printf ("%d - %s\n", clientes[i].id, clientes[i].nome);
+    char nomeMin[50], buscaMin[50];
+    paraMinusculo(buscaMin, nome);
+
+    for (int i = 0; i < totalClientes; i++) {
+        paraMinusculo(nomeMin, clientes[i].nome);
+        if (strstr(nomeMin, buscaMin) != NULL) {
+            printf("%d - %s\n", clientes[i].id, clientes[i].nome);
             localizados++;
         }
     }
+
     if (localizados == 0) {
         printf ("Nenhum cliente foi localizado!\n");
         return;
@@ -275,9 +324,10 @@ void menuCliente() {
     do {
         printf("\n--- MENU CLIENTE ---\n");
         printf(" 1 - Cadastrar cliente\n");
-        printf(" 2 - Listar / Buscar cliente\n");
+        printf(" 2 - Listar clientes\n");
         printf(" 3 - Editar cliente\n");
         printf(" 4 - Excluir cliente\n");
+        printf(" 5 - Buscar cliente por nome\n");
         printf(" 0 - Voltar\n");
         printf("Escolha uma acao: ");
 
@@ -295,6 +345,9 @@ void menuCliente() {
                 break;
             case 4:
                 excluirCliente();
+                break;
+            case 5:
+                buscarClienteNome();
                 break;
             case 0:
                 printf("\nRetornando ao menu principal...\n");
