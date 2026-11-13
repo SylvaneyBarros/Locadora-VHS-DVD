@@ -30,7 +30,7 @@ void cadastrarCliente() {
         return;
     }
     printf("Nome: ");
-    scanf(" %50[^\n]", clientes[totalClientes].nome);
+    scanf(" %49[^\n]", clientes[totalClientes].nome);
 
     printf("Data de Nascimento: ");
     scanf(" %s", clientes[totalClientes].dataDeNascimento);
@@ -67,6 +67,25 @@ int clienteValido(int id) {
     return 1;
 }
 
+void salvarClientes() {
+    arquivoClientes = fopen("clientes.csv", "w"); // "w" apaga o conteúdo antigo e regrava tudo
+    if (arquivoClientes == NULL) {
+        printf("[ERRO] Não foi possível abrir clientes.csv para gravação.\n");
+        return;
+    }
+
+    for (int i = 0; i < totalClientes; i++) {
+        fprintf(arquivoClientes, "%d;%s;%s;%s;%d\n",
+            clientes[i].id,
+            clientes[i].nome,
+            clientes[i].dataDeNascimento,
+            clientes[i].telefone,
+            clientes[i].ativo);
+    }
+
+    fclose(arquivoClientes);
+}
+
 void editarClientePorId(int id) {
     if (!clienteValido(id)) {
         printf("Id inválido ou cliente removido.\n");
@@ -81,13 +100,15 @@ void editarClientePorId(int id) {
     printf("\nInforme os novos dados:\n");
 
     printf("Nome: ");
-    scanf("%s", clientes[id].nome);
+    scanf(" %49[^\n]", clientes[id].nome);
 
     printf("Data de Nascimento: ");
     scanf(" %s", clientes[id].dataDeNascimento);
 
     printf("Telefone: ");
     scanf(" %s", clientes[id].telefone);
+
+    salvarClientes();
 
     printf("Cadastro atualizado com sucesso!\n\n");
 }
@@ -202,6 +223,9 @@ void excluirCliente() {
 
     if (confirmacao == 'S' || confirmacao == 's') {
         clientes[idCliente].ativo = 0;
+
+        salvarClientes();
+
         printf("Cliente excluído com sucesso!\n");
     } else {
         printf("Exclusão cancelada.\n");
@@ -213,6 +237,7 @@ void carregarClientes() {
     if (arquivoClientes == NULL) {
        return;
     }
+    totalClientes = 0;
 
     struct Cliente auxCliente;
 
@@ -228,6 +253,7 @@ void carregarClientes() {
             totalClientes++;
         }
     }
+    fclose(arquivoClientes);
 
 }
 
