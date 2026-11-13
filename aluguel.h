@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "utils.h"
+#include "clientes.h"
 
 struct Aluguel {
     int id;

@@ -20,8 +20,8 @@ FILE *arquivoClientes;
 struct Cliente clientes[50];
 int totalClientes = 0;
 
-/**
- *
+/**copia uma string e converte todas as letras em minúsculas.
+ *usada para não precisar diferenciar letras maiúsculas e minúscula.
  */
 void paraMinusculo(char *dest, const char *orig) {
     int i;
@@ -30,7 +30,12 @@ void paraMinusculo(char *dest, const char *orig) {
     }
     dest[i] = '\0';
 }
-
+/**
+ *Cadastra um novo cliente, lê nome, data de nascimento e telefone.
+ *o cadastro é cancelado se atingir o limite máximo de 50 cadastros.
+ *o vetor "vazio marca o cliente como ativo e acrescenta o 0
+ *registro ao final do arquivo csv.
+ */
 void cadastrarCliente() {
 
     limparTela();
@@ -83,6 +88,10 @@ void cadastrarCliente() {
     printf("Cliente cadastrado com sucesso!\n");
 
 }
+/**
+ *verifique se o id corresponde a um cliente existente e ativo.
+ *return 1 se o id esta dentro do intervalo cadastrado se o cliente está ativo. 0 se o cliente esta inativo ou foi removido.
+ */
 int clienteValido(int id) {
     if (id < 0 || id >= totalClientes) {
         return 0;
@@ -92,7 +101,9 @@ int clienteValido(int id) {
     }
     return 1;
 }
-
+/**
+ *fopen abre o arquivo, modo write, que sobrescreve o arquivo, porque nao da pra editar uma linha espeficia do arquivo.
+ */
 void salvarClientes() {
     arquivoClientes = fopen("clientes.csv", "w"); // "w" apaga o conteúdo antigo e regrava tudo
     if (arquivoClientes == NULL) {

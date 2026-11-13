@@ -4,16 +4,18 @@
 #include "midias.h"
 
 int main(void) {
-
     int menu;
+
     carregarClientes();
+    carregarMidias();
+    carregarCompras();
 
     do {
         printf("--- Locadora de video ---\n");
         printf(" 1 - Cliente\n");
         printf(" 2 - Midia VHS/DVD\n");
         printf(" 3 - Alugar/Devolver\n");
-        printf(" 4 - Comprar midea\n");
+        printf(" 4 - Comprar midia\n");
         printf(" 0 - Sair\n");
         menu = lerInteiro();
 
