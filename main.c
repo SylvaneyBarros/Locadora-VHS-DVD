@@ -13,7 +13,7 @@ int main(void) {
         printf(" 1 - Cliente\n");
         printf(" 2 - Midia VHS/DVD\n");
         printf(" 3 - Alugar/Devolver\n");
-        printf(" 4 - Comprar midea\n");
+        printf(" 4 - Comprar midias\n");
         printf(" 0 - Sair\n");
         menu = lerInteiro();
 
