@@ -260,8 +260,6 @@ void carregarClientes() {
 void menuCliente() {
     int menu;
 
-    carregarClientes();
-
     limparTela();
 
     do {

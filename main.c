@@ -285,6 +285,7 @@ void menuAluguel() {
 int main(void) {
 
     int menu;
+    carregarClientes();
 
     do {
         printf("--- Locadora de video ---\n");
