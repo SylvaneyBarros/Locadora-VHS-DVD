@@ -20,6 +20,9 @@ FILE *arquivoClientes;
 struct Cliente clientes[50];
 int totalClientes = 0;
 
+/**
+ *
+ */
 void paraMinusculo(char *dest, const char *orig) {
     int i;
     for (i = 0; orig[i] != '\0'; i++) {
