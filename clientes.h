@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "utils.h"
+#include <ctype.h>
 
 struct Cliente {
     int id;
@@ -18,6 +19,14 @@ FILE *arquivoClientes;
 
 struct Cliente clientes[50];
 int totalClientes = 0;
+
+void paraMinusculo(char *dest, const char *orig) {
+    int i;
+    for (i = 0; orig[i] != '\0'; i++) {
+        dest[i] = tolower((unsigned char) orig[i]);
+    }
+    dest[i] = '\0';
+}
 
 void cadastrarCliente() {
 
@@ -33,10 +42,10 @@ void cadastrarCliente() {
     scanf(" %49[^\n]", clientes[totalClientes].nome);
 
     printf("Data de Nascimento: ");
-    scanf(" %s", clientes[totalClientes].dataDeNascimento);
+    scanf(" %10[^\n]", clientes[totalClientes].dataDeNascimento);
 
     printf("Telefone: ");
-    scanf(" %s", clientes[totalClientes].telefone);
+    scanf(" %11[^\n]", clientes[totalClientes].telefone);
 
     clientes[totalClientes].id = totalClientes;
 
@@ -103,10 +112,10 @@ void editarClientePorId(int id) {
     scanf(" %49[^\n]", clientes[id].nome);
 
     printf("Data de Nascimento: ");
-    scanf(" %s", clientes[id].dataDeNascimento);
+    scanf(" %10[^\n]", clientes[id].dataDeNascimento);
 
     printf("Telefone: ");
-    scanf(" %s", clientes[id].telefone);
+    scanf(" %11[^\n]", clientes[id].telefone);
 
     salvarClientes();
 
@@ -136,7 +145,7 @@ void localizarClienteNome() {
     int idCliente;
 
     printf("\nInforme o nome do cliente:");
-    scanf("%s", nome);
+    scanf(" %49[^\n]", nome);
 
     for(int i = 0; i < totalClientes; i++) {
         if (strstr (clientes[i].nome, nome) != NULL) {
@@ -150,7 +159,7 @@ void localizarClienteNome() {
     }
     else {
         printf("Digite o Id do cliente para editar: ");
-        scanf("%d", &idCliente);
+        idCliente = lerInteiro();
 
         editarClientePorId(idCliente);
     }
@@ -160,7 +169,7 @@ void localizarClienteId() {
 
     int idCliente;
     printf("\nInforme o ID do cliente:");
-    scanf("%d", &idCliente);
+    idCliente = lerInteiro();
 
     editarClientePorId(idCliente);
 }
@@ -180,7 +189,8 @@ void editarCliente() {
         printf(" 1 - Nome do cliente\n");
         printf(" 2 - Id do cliente\n");
         printf(" 0 - Voltar\n");
-        scanf("%d", &menu);
+
+        menu = lerInteiro();
 
         switch (menu) {
             case 1:
@@ -211,7 +221,7 @@ void excluirCliente() {
     }
 
     printf("Informe o Id do cliente: ");
-    scanf("%d", &idCliente);
+    idCliente = lerInteiro();
 
     if (!clienteValido(idCliente)) {
         printf("Id inválido ou cliente já removido.\n");
@@ -270,7 +280,8 @@ void menuCliente() {
         printf(" 4 - Excluir cliente\n");
         printf(" 0 - Voltar\n");
         printf("Escolha uma acao: ");
-        scanf("%d", &menu);
+
+        menu = lerInteiro();
 
         switch (menu) {
             case 1:
