@@ -18,6 +18,7 @@ struct CompraMidia {
     int quantidade;
 };
 
+FILE *arquivoCompras;
 struct CompraMidia compras[MAX_COMPRAS];
 int totalCompras = 0;
 
@@ -42,22 +43,26 @@ void salvarComprasCSV() {
     fclose(arq);
 }
 
-void carregarComprasCSV() {
-    FILE *arq = fopen("compras.csv", "r");
-    if (arq == NULL) return;
-
-    totalCompras = 0;
-    while (totalCompras < MAX_COMPRAS &&
-           fscanf(arq, "%d;%d;%39[^;];%39[^;];%f;%d\n",
-                  &compras[totalCompras].id,
-                  &compras[totalCompras].idMidia,
-                  compras[totalCompras].fornecedor,
-                  compras[totalCompras].descricao,
-                  &compras[totalCompras].custoCompra,
-                  &compras[totalCompras].quantidade) == 6) {
-        totalCompras++;
+void carregarCompras() {
+    arquivoCompras = fopen("compras.csv", "r");
+    if (arquivoCompras == NULL) {
+        return;
     }
-    fclose(arq);
+    totalCompras = 0;
+    struct CompraMidia auxCompra;
+    while (fscanf(arquivoCompras, "%d;%d;%39[^;];%39[^;];%f;%d\n",
+                  &auxCompra.id,
+                  &auxCompra.idMidia,
+                  auxCompra.fornecedor,
+                  auxCompra.descricao,
+                  &auxCompra.custoCompra,
+                  &auxCompra.quantidade) == 6) {
+        if (totalCompras < MAX_COMPRAS) {
+            compras[totalCompras] = auxCompra;
+            totalCompras++;
+        }
+    }
+    fclose(arquivoCompras);
 }
 
 int buscarIndiceCompra(int idProcurado) {

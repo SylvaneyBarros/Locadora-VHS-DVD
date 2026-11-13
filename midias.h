@@ -17,6 +17,7 @@ struct VHS_DVD {
     int copiasDisponiveis;
 };
 
+FILE *arquivoMidias;
 struct VHS_DVD vhsDvd[MAX_MIDIAS];
 int totalMidias = 0;
 
@@ -41,22 +42,26 @@ void salvarMidiasCSV() {
     fclose(arq);
 }
 
-void carregarMidiasCSV() {
-    FILE *arq = fopen("midias.csv", "r");
-    if (arq == NULL) return;
-
-    totalMidias = 0;
-    while (totalMidias < MAX_MIDIAS &&
-           fscanf(arq, "%d;%49[^;];%3[^;];%19[^;];%f;%d\n",
-                  &vhsDvd[totalMidias].id,
-                  vhsDvd[totalMidias].titulo,
-                  vhsDvd[totalMidias].tipoDeMidia,
-                  vhsDvd[totalMidias].genero,
-                  &vhsDvd[totalMidias].precoLocacao,
-                  &vhsDvd[totalMidias].copiasDisponiveis) == 6) {
-        totalMidias++;
+void carregarMidias() {
+    arquivoMidias = fopen("midias.csv", "r");
+    if (arquivoMidias == NULL) {
+        return;
     }
-    fclose(arq);
+    totalMidias = 0;
+    struct VHS_DVD auxMidia;
+    while (fscanf(arquivoMidias, "%d;%49[^;];%3[^;];%19[^;];%f;%d\n",
+                  &auxMidia.id,
+                  auxMidia.titulo,
+                  auxMidia.tipoDeMidia,
+                  auxMidia.genero,
+                  &auxMidia.precoLocacao,
+                  &auxMidia.copiasDisponiveis) == 6) {
+        if (totalMidias < MAX_MIDIAS) {
+            vhsDvd[totalMidias] = auxMidia;
+            totalMidias++;
+        }
+    }
+    fclose(arquivoMidias);
 }
 
 // Devolve a posicao da midia no vetor, ou -1 se o ID nao existir

@@ -4,9 +4,11 @@
 #include "midias.h"
 
 int main(void) {
-
     int menu;
+
     carregarClientes();
+    carregarMidias();
+    carregarCompras();
 
     do {
         printf("--- Locadora de video ---\n");
