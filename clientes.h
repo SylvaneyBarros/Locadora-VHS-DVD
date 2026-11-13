@@ -164,7 +164,6 @@ void editarClientePorId(int id) {
 }
 void listarCliente() {
 
-    limparTela();
 
     printf("\nListagem de Clientes\n");
 
@@ -176,7 +175,6 @@ void listarCliente() {
         printf("%d - %s - %s\n", clientes[i].id, clientes[i].nome, clientes[i].ativo == 1?"Ativo" : "Inativo");
     }
 
-    pausar();
 }
 
 void buscarClienteNome() {
@@ -196,7 +194,6 @@ void buscarClienteNome() {
         }
     }
     if (localizados == 0) printf("Nenhum cliente foi localizado!\n");
-    pausar();
 }
 
 void localizarClienteNome() {
@@ -325,6 +322,7 @@ void carregarClientes() {
         &auxCliente.ativo) == 5) {
 
         if (auxCliente.id >= 0 && auxCliente.id < 50) {
+            auxCliente.multaPendente = 0;
             clientes[auxCliente.id] = auxCliente;
             totalClientes++;
         }
@@ -336,9 +334,8 @@ void carregarClientes() {
 void menuCliente() {
     int menu;
 
-    limparTela();
-
     do {
+        limparTela();
         printf("\n--- MENU CLIENTE ---\n");
         printf(" 1 - Cadastrar cliente\n");
         printf(" 2 - Listar clientes\n");
@@ -353,24 +350,30 @@ void menuCliente() {
         switch (menu) {
             case 1:
                 cadastrarCliente();
+                pausar();
                 break;
             case 2:
                 listarCliente();
+                pausar();
                 break;
             case 3:
                 editarCliente();
+                pausar();
                 break;
             case 4:
                 excluirCliente();
+                pausar();
                 break;
             case 5:
                 buscarClienteNome();
+                pausar();
                 break;
             case 0:
                 printf("\nRetornando ao menu principal...\n");
                 break;
             default:
                 printf("\n[ERRO] Opção inválida!\n");
+                pausar();
         }
     } while (menu != 0);
 }

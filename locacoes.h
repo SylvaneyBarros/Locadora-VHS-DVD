@@ -22,9 +22,10 @@ struct Aluguel {
     int devolvido;
 };
 
+FILE *arquivoAlugueis;
 struct Aluguel aluguel[MAX_ALUGUEIS];
-	int totalAlugueis = 0;
-	int matrizLocacoes[MAX_CLIENTES][MAX_MIDIAS];
+int totalAlugueis = 0;
+int matrizLocacoes[MAX_CLIENTES][MAX_MIDIAS];
 
 void salvarAlugueisCSV() {
     FILE *arquivo;
@@ -53,40 +54,28 @@ void salvarAlugueisCSV() {
     fclose(arquivo);
 }
 
-void carregarAlugueisCSV() {
-    FILE *arquivo;
-    int resultado;
-
-    arquivo = fopen("locacoes.csv", "r");
-
-    if (arquivo == NULL) {
-        printf("Arquivo de locacoes nao encontrado!\n");
+void carregarAlugueis() {
+    arquivoAlugueis = fopen("locacoes.csv", "r");
+    if (arquivoAlugueis == NULL) {
         return;
     }
-
     totalAlugueis = 0;
-
-    while (totalAlugueis < MAX_ALUGUEIS) {
-        resultado = fscanf(arquivo,
-            "%d;%d;%d;%d;%10[^;];%10[^;];%f;%d\n",
-            &aluguel[totalAlugueis].id,
-            &aluguel[totalAlugueis].idCliente,
-            &aluguel[totalAlugueis].idMidia,
-            &aluguel[totalAlugueis].diasLocados,
-            aluguel[totalAlugueis].dataLocacao,
-            aluguel[totalAlugueis].dataDevolucao,
-            &aluguel[totalAlugueis].valorTotal,
-            &aluguel[totalAlugueis].devolvido
-        );
-
-        if (resultado != 8) {
-            break;
+    struct Aluguel auxAluguel;
+    while (fscanf(arquivoAlugueis, "%d;%d;%d;%d;%10[^;];%10[^;];%f;%d\n",
+                  &auxAluguel.id,
+                  &auxAluguel.idCliente,
+                  &auxAluguel.idMidia,
+                  &auxAluguel.diasLocados,
+                  auxAluguel.dataLocacao,
+                  auxAluguel.dataDevolucao,
+                  &auxAluguel.valorTotal,
+                  &auxAluguel.devolvido) == 8) {
+        if (totalAlugueis < MAX_ALUGUEIS) {
+            aluguel[totalAlugueis] = auxAluguel;
+            totalAlugueis++;
         }
-
-        totalAlugueis++;
     }
-
-    fclose(arquivo);
+    fclose(arquivoAlugueis);
 }
 
 int buscarIndiceAluguel(int id) {
@@ -611,6 +600,7 @@ void menuAluguel() {
     int opcao;
 
     do {
+        limparTela();
         printf("\n===== MENU DE LOCACOES =====\n");
         printf("1 - Alugar midia\n");
         printf("2 - Listar locacoes\n");
@@ -625,47 +615,57 @@ void menuAluguel() {
         printf("0 - Voltar ao menu principal\n");
 
         printf("\nEscolha uma opcao: ");
-        scanf("%d", &opcao);
+        opcao = lerInteiro();
 
         switch (opcao) {
             case 1:
                 menualugar();
+                pausar();
                 break;
 
             case 2:
                 listarAlugueis();
+                pausar();
                 break;
 
             case 3:
                 devolver();
+                pausar();
                 break;
 
             case 4:
                 cancelarAluguel();
+                pausar();
                 break;
 
             case 5:
                 relatorioMidiaMaisAlugada();
+                pausar();
                 break;
 
             case 6:
                 relatorioClienteMaisLocacoes();
+                pausar();
                 break;
 
             case 7:
                 relatorioLocacoesDoCliente();
+                pausar();
                 break;
 
             case 8:
                 relatorioFinanceiro();
+                pausar();
                 break;
 
             case 9:
                 buscarAlugueis();
+                pausar();
                 break;
 
             case 10:
                 editarAluguel();
+                pausar();
                 break;
 
             case 0:
@@ -674,6 +674,7 @@ void menuAluguel() {
 
             default:
                 printf("\nOpcao invalida!\n");
+                pausar();
         }
 
     } while (opcao != 0);
