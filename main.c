@@ -4,12 +4,13 @@
 #include "midias.h"
 
 int main(void) {
+    setvbuf(stdout, NULL, _IONBF, 0);
     int menu;
 
     carregarClientes();
     carregarMidias();
     carregarCompras();
-    carregarAlugueisCSV();
+    carregarAlugueis();
 
     do {
         printf("--- Locadora de video ---\n");
