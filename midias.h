@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "utils.h"
 
 #define MAX_MIDIAS 50
@@ -130,15 +131,29 @@ void listarMidias() {
     }
 }
 
+// Copia o texto para "dest" trocando cada letra por minuscula (para a busca ignorar maiusculas)
+void titulosMinusculo(char *dest, const char *orig) {
+    int i;
+    for (i = 0; orig[i] != '\0'; i++) {
+        dest[i] = tolower((unsigned char) orig[i]);
+    }
+    dest[i] = '\0';
+}
+
 void buscarMidiaPorTitulo() {
     char termo[50];
+    char termoMin[50];
+    char tituloMin[50];
     int achou = 0;
 
     printf("\nDigite parte do titulo: ");
     scanf(" %49[^\n]", termo);
 
+    titulosMinusculo(termoMin, termo);
+
     for (int i = 0; i < totalMidias; i++) {
-        if (strstr(vhsDvd[i].titulo, termo) != NULL) {
+        titulosMinusculo(tituloMin, vhsDvd[i].titulo);
+        if (strstr(tituloMin, termoMin) != NULL) {
             printf(" -> [%d] %s (%s) | R$ %.2f | %d copias\n",
                    vhsDvd[i].id, vhsDvd[i].titulo, vhsDvd[i].tipoDeMidia,
                    vhsDvd[i].precoLocacao, vhsDvd[i].copiasDisponiveis);
