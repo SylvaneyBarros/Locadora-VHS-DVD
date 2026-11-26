@@ -448,6 +448,29 @@ void relatorioClienteMaisLocacoes() {
     }
 }
 
+void exibirMatrizLocacoes() {
+    montarMatrizLocacoes();
+
+    printf("\n===== MATRIZ 2D DE LOCACOES =====\n");
+
+    printf("%-20s", "CLIENTE");
+
+    for (int j = 0; j < totalMidias; j++) {
+        printf("%-15s", vhsDvd[j].titulo);
+    }
+
+    printf("\n");
+
+    for (int i = 0; i < totalClientes; i++) {
+        printf("%-20s", clientes[i].nome);
+
+        for (int j = 0; j < totalMidias; j++) {
+            printf("%-15d", matrizLocacoes[i][j]);
+        }
+
+        printf("\n");
+    }
+}
 void relatorioLocacoesDoCliente() {
     char nomeBusca[50];
     int i;
@@ -612,6 +635,7 @@ void menuAluguel() {
         printf("8 - Relatorio financeiro\n");
         printf("9 - Buscar locacoes\n");
         printf("10 - Editar locacao\n");
+        printf("11 - Exibir matriz 2D de locacoes\n");
         printf("0 - Voltar ao menu principal\n");
 
         printf("\nEscolha uma opcao: ");
@@ -667,7 +691,11 @@ void menuAluguel() {
                 editarAluguel();
                 pausar();
                 break;
-
+            case 11:
+    			exibirMatrizLocacoes();
+    			pausar();
+    			break;
+                
             case 0:
                 printf("\nVoltando ao menu principal...\n");
                 break;
